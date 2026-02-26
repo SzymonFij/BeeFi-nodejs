@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:15
-    container_name: my_postgress
+    container_name: beefi_postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -15,7 +15,7 @@ services:
 
   server:
     build: .
-    container_name: my_server
+    container_name: beefi_server
     restart: always
     env_file:
       - .env
