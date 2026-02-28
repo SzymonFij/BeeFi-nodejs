@@ -9,17 +9,26 @@ const SALT_ROUNDS = 10; // Rounds to hash password;
 
 router.post('/register', async (req, res) => {
 	try {
-		const { email, password } = req.body;
-		if (!email || !password) {
-			return res.status(400).json({ error: "Email and password are obligatory"});
+		const { email, password, phone, country, city, postal_code, street, house_number, apartment_number } = req.body;
+		if (!email
+			|| !password
+			|| !phone
+			|| !country
+			|| !city
+			|| !postal_code
+			|| !street
+			|| !house_number
+			|| !apartment_number
+		) {
+			return res.status(400).json({ error: "Please provide all required fields"});
 		}
 		
 		//Hashing the password
 		const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
 		// Save to database
 		const result = await pool.query(
-			`INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email`,
-			[email, password_hash]
+			`INSERT INTO users (email, password_hash, phone, country, city, postal_code, street, house_number, apartment_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id, email`,
+			[email, password_hash, phone, country, city, postal_code, street, house_number, apartment_number]
 		);
 		
 		const user = result.rows[0];
