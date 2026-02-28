@@ -27,7 +27,14 @@ app.get("/init-db", async (req, res) => {
 			password_hash VARCHAR(255) NOT NULL,
 			role VARCHAR(50) DEFAULT 'client',
 			payment_status VARCHAR(50),
-			created_at TIMESTAMP DEFAULT NOW()
+			created_at TIMESTAMP DEFAULT NOW(),
+			phone VARCHAR(20) NOT NULL,
+			country TEXT NOT NULL,
+			city TEXT NOT NULL,
+			postal_code VARCHAR(20) NOT NULL,
+			street TEXT NOT NULL,
+			house_number VARCHAR(20) NOT NULL,
+			apartment_number VARCHAR(20)
 		);
     `);
 	// Commented code should be run only once
