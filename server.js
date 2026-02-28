@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
     origin: process.env.FRONTEND_URL
 }));
-ensureSuperAdminExists();
+// ensureSuperAdminExists();
 
 app.get("/init-db", async (req, res) => {
   try {
